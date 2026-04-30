@@ -85,8 +85,22 @@ Opciones\:
 - `-m "mi mensaje"` : MESSAGE — Nos permite ingresar un comentario para el commit sin tener que abrir el editor de texto
 
 `git log`
-: Muestra todos los commits hechos para el repositorio actual, se le puede especificar un archivo (`git log archivo.txt`) para ver el historial de commits para ese archivo
+: Muestra todos los commits hechos para el repositorio actual, se le puede especificar un archivo (`git log archivo.txt`) para ver el historial de commits para ese archivo  
+Opciones\:
+
+- `--oneline` : Muestra de forma más resumida los commits (solo un hash por linea)
+- `--graph` : Muestra de forma grafica con ASCII los commits y sus branches
 
 ## Clase 3
 
 Nada nuevo...
+
+## Clase 4 (+AYSO)
+
+`git checkout`
+: Principalmente se usa para cambiar de rama, aunque también puede crear nuevas ramas o restaurar archivos a una version anterior (a otro commit). Para cambiar a otra rama el comando seria `git checkout <nombre-rama>`  
+Opciones\:
+
+- `-b <nombre-de-nueva-rama>` : Permite crear y cambiarse a una nueva rama ingresada como argumento
+- `-- <nombre-del-archivo>` : Permite que el estado o version de un archivo vuelva al commit anterior al mas reciente. El `--` le aclara a Git que lo que sigue es el nombre de un archivo y no el nombre de una rama a la que queres cambiar
+- `<hash-del-commit> <nombre-del-archivo>` : Permite cambiar la version de un archivo dado a la version de un commit especificado con su hash
