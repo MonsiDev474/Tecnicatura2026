@@ -104,3 +104,9 @@ Opciones\:
 - `-b <nombre-de-nueva-rama>` : Permite crear y cambiarse a una nueva rama ingresada como argumento
 - `-- <nombre-del-archivo>` : Permite que el estado o version de un archivo vuelva al commit anterior al mas reciente. El `--` le aclara a Git que lo que sigue es el nombre de un archivo y no el nombre de una rama a la que queres cambiar
 - `<hash-del-commit> <nombre-del-archivo>` : Permite cambiar la version de un archivo dado a la version de un commit especificado con su hash
+
+`git diff <commithash1/filename1> <commithash2/filename2>`
+: Sirve para comparar entre versiones de ya sea de commits, archivos o cambios en el área de preparación. El comando solo sin argumentos mostrará los cambios locales (cuando todavia no se hace git add)
+Opciones\:
+- `--staged` : Muestra los cambios que entrarán en el próximo commit
+- `<nombre_de_rama_master>` : Mostrará las diferencias entre la rama actual y la main
