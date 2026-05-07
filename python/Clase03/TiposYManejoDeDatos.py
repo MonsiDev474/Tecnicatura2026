@@ -21,6 +21,9 @@ if __name__ == '__main__':
     # concatenación con + en print()
     print("1. Mi grupo favorito es: " + miGrupoFavorito)
 
+    # ESMDEV: THIS IS A RANDOM LINE TESTING MERGING
+    print("I'm over here testing merging braches!")
+
     # concatenación en asignación con +
     miGrupoFavorito = "The Letter Black " + "The Best Rock Band"
     print("2. Mi grupo favorito es: " + miGrupoFavorito)
