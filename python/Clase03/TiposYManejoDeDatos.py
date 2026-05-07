@@ -22,6 +22,7 @@ if __name__ == '__main__':
     print("1. Mi grupo favorito es: " + miGrupoFavorito)
 
     # ESMDEV: THIS IS A RANDOM LINE TESTING MERGING
+    # AND THIS IS ANOTHER LINE TO TEST CONFLICT
     print("I'm over here testing merging braches!")
 
     # concatenación en asignación con +
