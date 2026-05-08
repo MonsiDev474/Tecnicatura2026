@@ -72,6 +72,9 @@ Opciones\:
 `git add`
 : Añade un archivo al área de preparación, puede usarse un punto `.` para indicar que TODO lo que se encuentra en el directorio actual sea añadido al área de preparación (ej. estamos parados en el directorio `python/`, e ingresamos el comando `git add .`, esto añadirá todos los archivos y cambios hechos en `python/` al área de preparación listos a ser commiteados)
 
+`git restore`
+: Lo opuesto a add, revierte los cambios a un archivo/directorio para que vuelvan a estar como esten en el commit más reciente. Se le puede especificar un archivo con `git restore <nombre_archivo>` o directamente se puede revertir todo lo que no esté stageado con `git restore .`
+
 `git rm`
 : GIT REMOVE — Elimina del área de preparación y también físicamente el archivo pasado como argumento, para borrar un archivo del área de preparación pero NO de forma local entonces se utiliza la opción `--cached` (ej. `git rm archivo.txt` borrará el archivo de tu computadora y del área de preparación, en cambio `git rm --cached archivo.txt` borrará el archivo solo del área de preparación y NO de tu computadora)
 
@@ -98,7 +101,7 @@ Nada nuevo...
 ## Clase 4 (+AYSO)
 
 `git checkout`
-: Principalmente se usa para cambiar de rama, aunque también puede crear nuevas ramas o restaurar archivos a una version anterior (a otro commit). Para cambiar a otra rama el comando seria `git checkout <nombre-rama>`  
+: Principalmente se usa para cambiar de rama, aunque también puede crear nuevas ramas o restaurar archivos a una version anterior (a otro commit). Para cambiar a otra rama el comando seria `git checkout <nombre-rama>`. Ojo: hacer checkout hace que cualquier cambio local en el working directory que no haya sido stageado sea eliminado o perdido.  
 Opciones\:
 
 - `-b <nombre-de-nueva-rama>` : Permite crear y cambiarse a una nueva rama ingresada como argumento
@@ -106,7 +109,23 @@ Opciones\:
 - `<hash-del-commit> <nombre-del-archivo>` : Permite cambiar la version de un archivo dado a la version de un commit especificado con su hash
 
 `git diff <commithash1/filename1> <commithash2/filename2>`
-: Sirve para comparar entre versiones de ya sea de commits, archivos o cambios en el área de preparación. El comando solo sin argumentos mostrará los cambios locales (cuando todavia no se hace git add)
+: Sirve para comparar entre versiones de ya sea de commits, archivos o cambios en el área de preparación. El comando solo sin argumentos mostrará los cambios locales (cuando todavia no se hace git add)  
 Opciones\:
+
 - `--staged` : Muestra los cambios que entrarán en el próximo commit
 - `<nombre_de_rama_master>` : Mostrará las diferencias entre la rama actual y la main
+
+`git branch`
+: Sirve para ver las ramas existentes y en cuál estamos parados  
+Opciones\:
+
+- `-a` : Lista todas las ramas incluyendo las remotas
+- `-m <new_name>` : Cambia el nombre de la rama actual al nombre dado como argumento
+- `-d <branch_name>` : Elimina de forma segura una rama (solo permite eliminar si la rama ya fue mergeada con main)
+- `-D <branch_name>` : Elimina de forma forzada una rama (no importa si fue mergeada con main o no)
+
+`git switch <branch_name>`
+: Sirve para cambiar entre ramas similar a checkout pero menos ambiguo y más seguro (se recomienda usarlo junto con `git restore` si se desea imitar las funciones de `checkout`)  
+Opciones\:
+
+- `-c <branch_name>` : Creará una rama con el nombre dado como argumento
