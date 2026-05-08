@@ -91,8 +91,10 @@ Opciones\:
 : Muestra todos los commits hechos para el repositorio actual, se le puede especificar un archivo (`git log archivo.txt`) para ver el historial de commits para ese archivo  
 Opciones\:
 
-- `--oneline` : Muestra de forma más resumida los commits (solo un hash por linea)
-- `--graph` : Muestra de forma grafica con ASCII los commits y sus branches
+- `--oneline` : Muestra de forma más resumida los commits (solo un hash corto por linea)
+- `--graph` : Muestra de forma grafica con arte ASCII los commits y sus branches
+- `--all` : Por defecto `git log` solo muestra los commits en la rama actual, con esta opcion podemos forzar a que muestre los TODOS los commits, incluyendo de otras ramas locales o remotas
+- `--decorate` : "decora" la lista de commits con parentesis indicando punteros y dónde están situados
 
 ## Clase 3
 
