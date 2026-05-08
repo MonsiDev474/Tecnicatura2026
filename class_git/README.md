@@ -131,3 +131,14 @@ Opciones\:
 Opciones\:
 
 - `-c <branch_name>` : Creará una rama con el nombre dado como argumento
+
+`git reset <branch_name/file_name>`
+: Sirve para volver en el tiempo y "borrar" commits. Seria como un undo forzoso.  
+Opciones\:
+
+- `--soft` : Va atras en el tiempo pero mantiene los cambios que tengas stageados. (ej. `git reset --soft HEAD~1` haria un undo al ultimo commit)
+- `--mixed` : Va atras en el tiempo y unstagea los cambios que tengas (mantiene los archivos en tu disco)
+- `--hard` : Va atras en el tiempo y no solo unstagea sino que tambien borra los cambios en tu disco
+
+`git revert <target_commit_hash>`
+: Revierte los cambios creando un nuevo commit, en lugar de volver en el tiempo. Ideal para ramas compartidas con equipos, preferible antes que usar `reset`  
