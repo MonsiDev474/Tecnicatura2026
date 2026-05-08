@@ -23,6 +23,7 @@ if __name__ == '__main__':
 
     # ESMDEV: THIS IS A RANDOM LINE TESTING MERGING
     # AND THIS IS ANOTHER LINE TO TEST CONFLICT
+    # AND THIS IS A LINE THAT'LL CREATE A CONFLICT (esmdev-python branch)
     print("I'm over here testing merging braches!")
 
     # concatenación en asignación con +
