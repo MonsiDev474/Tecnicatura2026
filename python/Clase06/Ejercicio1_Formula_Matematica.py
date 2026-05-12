@@ -8,5 +8,5 @@ if __name__ == "__main__":
             var_b = float(input("b = "))
     var_c = float(input("c = "))
 
-    resultado = ((var_a * 3) * (var_b * 2 - 2 * var_a * var_c)) / (2 * var_b)
+    resultado = ((var_a ** 3) * (var_b ** 2 - 2 * var_a * var_c)) / (2 * var_b)
     print(f"El resultado de  a3*(b2-2ac)/2b  es: {resultado}")
