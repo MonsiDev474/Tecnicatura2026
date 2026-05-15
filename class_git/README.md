@@ -146,13 +146,13 @@ Opciones\:
 ## Clase 5 (+AYSO)
 
 `git ignore`
-: Permite ignorar archivos pasados como argumentos. Por ej. `git ignore archivo.py`  
+: Permite ignorar archivos pasados como argumentos. Por ej. `git ignore archivo.py`
 
 `git tag <version> <hash_commit>`
-: Permite crear "puntos" en el historial de commits  
+: Permite crear "puntos" en el historial de commits
 
 `git show`
-: Por defecto sirve para visualizar detalles del último commit, pero en realidad sirve para ver detalles de cualquier objeto git (por ejemplo una `tag`)  
+: Por defecto sirve para visualizar detalles del último commit, pero en realidad sirve para ver detalles de cualquier objeto git (por ejemplo una `tag`)
 
 `git stash`
 : Util para guardar temporalmente los cambios no confirmados (staged o no) para poder trabajar en otras ramas o realizar una tarea de emergencia.  
