@@ -142,3 +142,26 @@ Opciones\:
 
 `git revert <target_commit_hash>`
 : Revierte los cambios creando un nuevo commit, en lugar de volver en el tiempo. Ideal para ramas compartidas con equipos, preferible antes que usar `reset`  
+
+## Clase 5 (+AYSO)
+
+`git ignore`
+: Permite ignorar archivos pasados como argumentos. Por ej. `git ignore archivo.py`  
+
+`git tag <version> <hash_commit>`
+: Permite crear "puntos" en el historial de commits  
+
+`git show`
+: Por defecto sirve para visualizar detalles del último commit, pero en realidad sirve para ver detalles de cualquier objeto git (por ejemplo una `tag`)  
+
+`git stash`
+: Util para guardar temporalmente los cambios no confirmados (staged o no) para poder trabajar en otras ramas o realizar una tarea de emergencia.  
+Opciones (la mayoria no usa guión)\:
+
+- `pop` : Permite retomar el ultimo stash y lo elimina de la lista de stashes
+- `push -m <mensaje>` : Guarda un stash con un mensaje dado, util para identificar el stash
+- `-u` : UNTRACKED — El stash incluirá archivos nuevos no añadidos a git
+- `list` : Muestra la lista de stashes con sus numeros y mensajes si tienen
+- `apply stash@{n}` : Aplica un stash sin eliminarlo de la lista como hace `pop`
+- `drop stash@{n}` : Elimina un stash especifico con el numero de stash
+- `clear` : Elimina todos los stashes guardados
