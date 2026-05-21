@@ -18,6 +18,8 @@ Opciones\:
 - `-a` : ALL — Mostrará también los archivos ocultos
 - `-l` : LONG LISTING FORMAT — Mostrará también los permisos, dueño, tamaño y fecha de modificación de los archivos
 
+<br>
+
 `clear`
 : Limpia la consola
 
@@ -26,6 +28,8 @@ Opciones\:
 Opciones\:
 
 - `-h` : HUMAN-READABLE — Mostrará los datos de una forma más amigable para nosotros, con Terabytes, Gigabytes, Megabytes, etc. en lugar de solo Kilobytes.
+
+<br>
 
 `mkdir`
 : MAKE DIRECTORY — Crea un directorio con el nombre que le siga al comando (ej. `mkdir tecnicatura2026`)
@@ -50,12 +54,16 @@ Opciones\:
 
 - `-c` : CLEAR — Borra todos los comandos que se han ido guardando en el historial
 
+<br>
+
 `rm`
 : REMOVE — Borra de forma permanente el archivo que se le ingrese como argumento. Sín la opcion `-r` no puede borrar directorios. (ej. `rm archivo.txt`, esto borraría sin vuelta atrás a archivo.txt)  
 Opciones\:
 
 - `-r` : RECURSIVE — Eliminará los archivos y directorios que encuentre de manera recursiva, es decir que puede eliminar un directorio y los contenidos de éste. (ej. `rm -r tecnicatura2026/`, borraria de forma permanente todos los contenidos de ese directorio)
 - `-f` : FORCE — Ignora los archivos que no existen y no pide confirmación antes de borrar, incluso si el archivo está protegido
+
+<br>
 
 `--help`
 : Opcion universal para la mayoria de comandos, devuelve instrucciones de uso, opciones e información sobre el comando que se haya indicado (ej. `mkdir --help` mostrará información detallada del comando `mkdir`, mientras que `rm --help` mostrará información del comando `rm`)
@@ -87,6 +95,8 @@ Opciones\:
 
 - `-m "mi mensaje"` : MESSAGE — Nos permite ingresar un comentario para el commit sin tener que abrir el editor de texto
 
+<br>
+
 `git log`
 : Muestra todos los commits hechos para el repositorio actual, se le puede especificar un archivo (`git log archivo.txt`) para ver el historial de commits para ese archivo  
 Opciones\:
@@ -110,12 +120,16 @@ Opciones\:
 - `-- <nombre-del-archivo>` : Permite que el estado o version de un archivo vuelva al commit anterior al mas reciente. El `--` le aclara a Git que lo que sigue es el nombre de un archivo y no el nombre de una rama a la que queres cambiar
 - `<hash-del-commit> <nombre-del-archivo>` : Permite cambiar la version de un archivo dado a la version de un commit especificado con su hash
 
+<br>
+
 `git diff <commithash1/filename1> <commithash2/filename2>`
 : Sirve para comparar entre versiones de ya sea de commits, archivos o cambios en el área de preparación. El comando solo sin argumentos mostrará los cambios locales (cuando todavia no se hace git add)  
 Opciones\:
 
 - `--staged` : Muestra los cambios que entrarán en el próximo commit
 - `<nombre_de_rama_master>` : Mostrará las diferencias entre la rama actual y la main
+
+<br>
 
 `git branch`
 : Sirve para ver las ramas existentes y en cuál estamos parados  
@@ -126,11 +140,15 @@ Opciones\:
 - `-d <branch_name>` : Elimina de forma segura una rama (solo permite eliminar si la rama ya fue mergeada con main)
 - `-D <branch_name>` : Elimina de forma forzada una rama (no importa si fue mergeada con main o no)
 
+<br>
+
 `git switch <branch_name>`
 : Sirve para cambiar entre ramas similar a checkout pero menos ambiguo y más seguro (se recomienda usarlo junto con `git restore` si se desea imitar las funciones de `checkout`)  
 Opciones\:
 
 - `-c <branch_name>` : Creará una rama con el nombre dado como argumento
+
+<br>
 
 `git reset <branch_name/file_name>`
 : Sirve para volver en el tiempo y "borrar" commits. Seria como un undo forzoso.  
@@ -139,6 +157,8 @@ Opciones\:
 - `--soft` : Va atras en el tiempo pero mantiene los cambios que tengas stageados. (ej. `git reset --soft HEAD~1` haria un undo al ultimo commit)
 - `--mixed` : Va atras en el tiempo y unstagea los cambios que tengas (mantiene los archivos en tu disco)
 - `--hard` : Va atras en el tiempo y no solo unstagea sino que tambien borra los cambios en tu disco
+
+<br>
 
 `git revert <target_commit_hash>`
 : Revierte los cambios creando un nuevo commit, en lugar de volver en el tiempo. Ideal para ramas compartidas con equipos, preferible antes que usar `reset`  
@@ -165,3 +185,7 @@ Opciones (la mayoria no usa guión)\:
 - `apply stash@{n}` : Aplica un stash sin eliminarlo de la lista como hace `pop`
 - `drop stash@{n}` : Elimina un stash especifico con el numero de stash
 - `clear` : Elimina todos los stashes guardados
+
+## Clase 6
+
+Nada nuevo...
