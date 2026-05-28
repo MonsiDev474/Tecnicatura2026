@@ -78,22 +78,42 @@ Opciones\:
 : Muestra los cambios hechos en el área de trabajo, los cambios añadidos al área de preparación y qué archivos son nuevos y todavía no trackeados (todo en el repositorio actual)
 
 `git add`
-: Añade un archivo al área de preparación, puede usarse un punto `.` para indicar que TODO lo que se encuentra en el directorio actual sea añadido al área de preparación (ej. estamos parados en el directorio `python/`, e ingresamos el comando `git add .`, esto añadirá todos los archivos y cambios hechos en `python/` al área de preparación listos a ser commiteados)
+: Añade un archivo al área de preparación, puede usarse un punto `.` para indicar que TODO lo que se encuentra en el directorio actual sea añadido al área de preparación (ej. estamos parados en el directorio `python/`, e ingresamos el comando `git add .`, esto añadirá todos los archivos y cambios hechos en `python/` al área de preparación listos a ser commiteados)  
+Opciones\:
+
+- `-A` : stagea todos los cambios (nuevos, modificados y eliminados) en todo el repositorio, sin importar desde qué carpeta se ejecute el comando
+
+<br>
 
 `git restore`
-: Lo opuesto a add, revierte los cambios a un archivo/directorio para que vuelvan a estar como esten en el commit más reciente. Se le puede especificar un archivo con `git restore <nombre_archivo>` o directamente se puede revertir todo lo que no esté stageado con `git restore .`
+: Lo opuesto a add, revierte los cambios hechos a un archivo/directorio para que vuelvan a estar como esten en el commit más reciente. Se le puede especificar un archivo con `git restore <nombre_archivo>` o directamente se puede revertir todo lo que no esté stageado con `git restore .`. También se le puede especificar qué estado revertir, por defecto se interpreta que es `--worktree`, es decir que la restauracion se aplicará a los archivos locales (en el working directory)  
+Opciones\:
+
+- `--staged <nombre-archivo>` : saca al archivo del staging area sin tocar al archivo local, puede combinarse con `--worktree` para unstagear el archivo Y restaurarlo a como estaba en el ultimo commit
+- `--source=<hash/HEAD/branch> -- <nombre-archivo>` : permite restaurar el archivo al estado que tenia en el commit especificado o al estado que tenia en otra rama, hay que hacer un `git add` y un commit despues de usar este comando para guardar los cambios (extra: el comando completo usando el nombre de la rama seria `git restore --source=rama2 -- archivo.txt`, se puede usar `--` como en `checkout` para indicar que lo que sigue es una ruta de archivo y no una rama)
+
+<br>
 
 `git rm`
 : GIT REMOVE — Elimina del área de preparación y también físicamente el archivo pasado como argumento, para borrar un archivo del área de preparación pero NO de forma local entonces se utiliza la opción `--cached` (ej. `git rm archivo.txt` borrará el archivo de tu computadora y del área de preparación, en cambio `git rm --cached archivo.txt` borrará el archivo solo del área de preparación y NO de tu computadora)
 
-`git config --list`
-: Muestra en forma de lista por pantalla las configuraciones actuales de tu Git, incluyendo información como Usuario y Email (si es que fueron ingresados antes con `git config --global` o `git config --local`)
+`git config`
+: Sirve para obtener y establecer variables de configuración que controlan el funcionamiento, la apariencia y el comportamiento de Git (principalmente para establecer nombre e email)  
+Opciones\:
+
+- `--list` o `-l` : Muestra en forma de lista por pantalla las configuraciones actuales de tu Git, incluyendo información como Usuario e Email (si es que fueron ingresados antes)
+- `--local <variable>` : configuraciones que solo estarán disponibles para el repositorio actual, sobreescribe a `global` y a `system` (por ej. `--local user.name "Juan Perez"` para ingresar tu nombre o `--local user.email "juanp@gmail.com"` para ingresar tu mail)
+- `--global <variable>` : configuraciones que estarán disponible para todos los repositorios del usuario actual
+- `--system <variable>` : configuraciones que estarán disponible para todos los usuarios del SO y todos los repositorios (requiere permisos de administrador)
+
+<br>
 
 `git commit`
 : Toma todos los cambios que hay en el área de preparación (los que fueron añadidos con `git add`) y los graba permanentemente en el historial del repositorio actual, si no se ingresa ninguna opción entonces se abrirá el editor de texto que tengas (puede ser vim o nano) para escribir el mensaje de commit  
 Opciones\:
 
 - `-m "mi mensaje"` : MESSAGE — Nos permite ingresar un comentario para el commit sin tener que abrir el editor de texto
+- `-a` o `--all` : añade al commit todos los archivos que ya estén trackeados y que hayan sido modificados o eliminados, ahorrandote la necesidad de hacer `git add` (Ojo, esta opción no incluye archivos nuevos)
 
 <br>
 
@@ -105,6 +125,8 @@ Opciones\:
 - `--graph` : Muestra de forma grafica con arte ASCII los commits y sus branches
 - `--all` : Por defecto `git log` solo muestra los commits en la rama actual, con esta opcion podemos forzar a que muestre los TODOS los commits, incluyendo de otras ramas locales o remotas
 - `--decorate` : "decora" la lista de commits con parentesis indicando punteros y dónde están situados
+- `--raw` : muestra de forma resumida y en lista qué archivos se modificaron y cómo (M modified, A added, D deleted, R renamed, C copied) en cada commit
+- `-n <número>` : permite especificar la cantidad de commits a mostrar
 
 ## Clase 3
 
@@ -113,21 +135,27 @@ Nada nuevo...
 ## Clase 4 (+AYSO)
 
 `git checkout`
-: Principalmente se usa para cambiar de rama, aunque también puede crear nuevas ramas o restaurar archivos a una version anterior (a otro commit). Para cambiar a otra rama el comando seria `git checkout <nombre-rama>`. Ojo: hacer checkout hace que cualquier cambio local en el working directory que no haya sido stageado sea eliminado o perdido.  
+: Principalmente se usa para cambiar de rama, aunque también puede crear nuevas ramas o restaurar archivos a una version anterior (a otro commit o al anterior). Para cambiar a otra rama el comando seria `git checkout <nombre-rama>`, mientras que para restaurar un archivo a como estaba en el commit anterior de la rama actual seria `git checkout <nombre-archivo>`. Ojo: hacer checkout hace que cualquier cambio local (en el working directory) que no haya sido stageado sea eliminado o perdido (y es irreversible).  
 Opciones\:
 
 - `-b <nombre-de-nueva-rama>` : Permite crear y cambiarse a una nueva rama ingresada como argumento
-- `-- <nombre-del-archivo>` : Permite que el estado o version de un archivo vuelva al commit anterior al mas reciente. El `--` le aclara a Git que lo que sigue es el nombre de un archivo y no el nombre de una rama a la que queres cambiar
-- `<hash-del-commit> <nombre-del-archivo>` : Permite cambiar la version de un archivo dado a la version de un commit especificado con su hash
+- `<nombre-rama> -- <nombre-del-archivo>` : Permite que el estado o version de un archivo vuelva al estado que tenia en la rama especificada, hay que hacer un commit despues de este comando para guardar el cambio. El `--` le aclara a Git que lo que sigue es el nombre de un archivo y no el nombre de una rama a la que queres cambiar, util cuando tenes un archivo que se llama igual que tu rama (por defecto checkout prioriza cambiar de rama antes que restaurar un archivo)
+- `<hash-del-commit> <nombre-del-archivo>` : Permite cambiar la version de un archivo dado el hash del commit especifico deseado
+- `<hash-de-un-commit>` : nos pondrá en Detached Head y restaurará el área de trabajo a como estaba en el commit especificado, para salir de este estado y restaurar el puntero podemos hacer `git checkout <nombre-de-rama-main>`
+- `-f` o `--force` : fuerza el cambio de rama o la restauración de archivos, ignorando y descartando cualquier cambio local que no haya sido stageado. Por defecto git no deja cambiar a una rama si tus cambios locales hacen conflicto con la rama de destino, pero al hacer `git checkout -f <nombre-rama>` lo obligas, perdiendo cualquier modificacion local que chocaban con la rama anterior. Mientras que si haces `git checkout -f` sin especificar un archivo o rama el comando "limpia" el working directory, restaurando todos los archivos trackeados a como estaban en el commit anterior y destruyendo cualquier cambio que hayas hecho. Cabe mencionar que ambos usos de `-f` son irreversibles
 
 <br>
 
-`git diff <commithash1/filename1> <commithash2/filename2>`
-: Sirve para comparar entre versiones de ya sea de commits, archivos o cambios en el área de preparación. El comando solo sin argumentos mostrará los cambios locales (cuando todavia no se hace git add)  
+`git diff`
+: Sirve para ver las diferencias linea por linea entre versiones, de ya sea de commits, archivos o lo que esté en el área de preparación. El comando solo sin argumentos mostrará los cambios locales hechos (lo que no esté stageado). Las lineas rojas indican lo que fue modificado o borrado, mientras que las verdes indican lo que fue agregado  
 Opciones\:
 
+- `--stat` : Muestra de forma resumida los archivo modificados y cuales fueron sus cambios en cada uno
+- `--numstat` : Muestra de forma incluso más resumida los cambios de cada archivo que haya sido modificado, mostrando solamente las lineas que fueron agregadas (izquierda) y eliminadas (derecha)
 - `--staged` : Muestra los cambios que entrarán en el próximo commit
-- `<nombre_de_rama_master>` : Mostrará las diferencias entre la rama actual y la main
+- `<nombre_de_otra_rama>` : Mostrará las diferencias entre la rama actual y la rama dada, si ingresas el nombre de la rama actual simplemente mostrará los cambios locales hechos (si es que hay)
+- `<nombre-rama-1>..<nombre-rama-2>` : muestra qué tiene la rama B que no tenga la rama A
+- `<hash1> <hash2>` : compara dos commits
 
 <br>
 
@@ -150,12 +178,12 @@ Opciones\:
 
 <br>
 
-`git reset <branch_name/file_name>`
-: Sirve para volver en el tiempo y "borrar" commits. Seria como un undo forzoso.  
+`git reset <hash>`
+: Sirve para volver en el tiempo y "borrar" commits. Seria como un deshacer forzoso. Se puede indicar el nombre de un archivo en vez de un hash, esto hará que el archivo sea unstageado (aunque es preferible usar `git restore --staged`)  
 Opciones\:
 
-- `--soft` : Va atras en el tiempo pero mantiene los cambios que tengas stageados. (ej. `git reset --soft HEAD~1` haria un undo al ultimo commit)
-- `--mixed` : Va atras en el tiempo y unstagea los cambios que tengas (mantiene los archivos en tu disco)
+- `--soft` : Va atras en el tiempo pero mantiene los cambios que tengas stageados. (ej. `git reset --soft HEAD~1` haria un undo al ultimo commit, pero también se puede especificar un hash)
+- `--mixed` : Va atras en el tiempo y unstagea los cambios que tengas (mantiene los archivos en tu disco intactos). Este es el que Git usa por defecto si no aclaras una opción. Si ingresas `git reset` sin nada se hace un `--mixed HEAD`, util para cuando queres deshacer un `git add .`
 - `--hard` : Va atras en el tiempo y no solo unstagea sino que tambien borra los cambios en tu disco
 
 <br>
@@ -168,11 +196,28 @@ Opciones\:
 `git ignore`
 : Permite ignorar archivos pasados como argumentos. Por ej. `git ignore archivo.py`
 
+<br>
+
+`git merge <nombre-de-rama-fuente>`
+: Sirve para fusionar dos ramas distintas, para esto primero hay que pararse en la rama que va a recibir los cambios, por ejemplo primero hacer `git switch main` seguido de `git merge auxiliar`. Si la rama destino y fuente tuvieron commits por separado antes del merge, git hará el merge como un commit nuevo en vez de un fast-forward. Cuando se genera un conflicto, el archivo con el conflicto tendrá marcas (<<<<<<< ======= >>>>>>>) en forma de bloque y dentro el codigo con el problema. Para solucionar esto hay que borrar las marcas y modificar el codigo como mejor convenga, luego de eso hay que guardar el archivo y hacer `git add archivo_con_el_problema.txt`, luego se puede usar `git merge --continue` para finalizar el merge.  
+Opciones\:
+
+- `--continue` : permite finalizar un merge una vez resueltos los conflictos manualmente, esta opción es preferible antes que hacer un `git commit` porque tiene más funcionalidades (verifica si hay un merge en proceso y avisa si dejaste algun conflicto o no guardaste los archivos)
+- `--abort` : Si el conflicto es muy complejo esta opción revierte el repositorio a como estaba antes de hacer el merge, util como boton de pánico en caso de un conflicto crítico
+
+<br>
+
 `git tag <version> <hash_commit>`
-: Permite crear "puntos" en el historial de commits
+: Permite crear punteros en el historial de commits, ej. `git tag v1.0 <hash>`  
+Opciones\:
+
+- `-a <version> -m "mensaje de etiqueta anotada"` : ANNOTATED — le indica a git a crear una etiqueta anotada en vez de una ligera, la diferencia es que la ligera es un simple puntero a un commit sin información detallada, como si fuera una rama que no se mueve, mientras que una etiqueta anotada es un objeto completo e independiente dentro de git el cual guarda quién la creó y cuándo se creó. Pide si o si un mensaje si se usa esta opcion.
+- `-d <version>` : DELETE — elimina la etiqueta que le indiquemos como argumento, por ej. `git tag -d version_2.4`
+
+<br>
 
 `git show`
-: Por defecto sirve para visualizar detalles del último commit, pero en realidad sirve para ver detalles de cualquier objeto git (por ejemplo una `tag`)
+: Por defecto sirve para visualizar detalles (adiciones, modificaciones o eliminaciones en cada archivo que fue modificado) linea por linea del último commit, pero en realidad sirve para ver detalles de cualquier objeto git (por ejemplo una tag anotada usando `git show <version>`)
 
 `git stash`
 : Util para guardar temporalmente los cambios no confirmados (staged o no) para poder trabajar en otras ramas o realizar una tarea de emergencia.  
