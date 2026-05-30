@@ -94,8 +94,15 @@ Opciones\:
 
 <br>
 
-`git rm`
-: GIT REMOVE — Elimina del área de preparación y también físicamente el archivo pasado como argumento, para borrar un archivo del área de preparación pero NO de forma local entonces se utiliza la opción `--cached` (ej. `git rm archivo.txt` borrará el archivo de tu computadora y del área de preparación, en cambio `git rm --cached archivo.txt` borrará el archivo solo del área de preparación y NO de tu computadora)
+`git rm <nombre-archivo>`
+: GIT REMOVE — Elimina del área de preparación y también del directorio de trabajo al archivo pasado como argumento.  
+Opciones\:
+
+- `--cached <nombre-archivo>` : borra el archivo (o carpeta si se combina con `-r`) solo del área de preparación y NO de tu computadora, util para sacar archivos o carpetas que añadiste por error y querés agregar a tu .gitignore
+- `-f` o `--force` : Por defecto git no te deja borrar un archivo que tenga cambios locales sin guardar en un commit, esta opción ignora esos cambios y elimina el archivo de todas formas (stage y worktree)
+- `-r <nombre-carpeta-/>` : RECURSIVE — Permite borrar carpetas y todos sus contenidos dentro
+
+<br>
 
 `git config`
 : Sirve para obtener y establecer variables de configuración que controlan el funcionamiento, la apariencia y el comportamiento de Git (principalmente para establecer nombre e email)  
