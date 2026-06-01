@@ -7,13 +7,13 @@ public class CompaniaVentaCarros {
         Scanner entrada = new Scanner(System.in);
         final int salarioMensual = 1000;
         float valorVentaPorCarro = 0;
-        int cantVendidos = 0;
         
         System.out.print("Ingrese la cantidad de carros vendidos: ");
-        cantVendidos = Integer.parseInt(entrada.nextLine());
+        int cantVendidos = Integer.parseInt(entrada.nextLine());
         if (cantVendidos < 0) {
             cantVendidos = 0;
         }
+        
         int comisionCarroVend = 150 * cantVendidos;
         
         if (cantVendidos > 0) {
