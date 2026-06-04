@@ -327,6 +327,25 @@ http-client.private.env.json
 
 
 # ------------------------------------------------------
+# ----------------------- NETBEANS ---------------------
+# -----------------------          ---------------------
+
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# -----------------------          ---------------------
+# ----------------------- NETBEANS ---------------------
+# ------------------------------------------------------
+
+
+
+# ------------------------------------------------------
 # ------------------------ JAVA ------------------------
 # ------------------------      ------------------------
 
@@ -392,3 +411,5 @@ replay_pid*
 /1er_Semestre/java/Clase08/Ejercicio5/nbproject/private/
 /1er_Semestre/java/Clase08/Ejercicio6/nbproject/private/
 /1er_Semestre/java/Clase08/Ejercicio7/nbproject/private/
+/1er_Semestre/java/Clase09/C9Teoria/nbproject/private/
+/1er_Semestre/java/Clase09/C9Practica/nbproject/private/

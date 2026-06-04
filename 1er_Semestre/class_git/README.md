@@ -133,7 +133,12 @@ Opciones\:
 - `--all` : Por defecto `git log` solo muestra los commits en la rama actual, con esta opcion podemos forzar a que muestre los TODOS los commits, incluyendo de otras ramas locales o remotas
 - `--decorate` : "decora" la lista de commits con parentesis indicando punteros y dónde están situados
 - `--raw` : muestra de forma resumida y en lista qué archivos se modificaron y cómo (M modified, A added, D deleted, R renamed, C copied) en cada commit
-- `-n <número>` : permite especificar la cantidad de commits a mostrar
+- `-n <número>` o `-<numero>` : permite especificar la cantidad de commits a mostrar
+- `-p` : Muestra de forma detallada los mensajes de commit junto con el diff de cada uno, util para ver qué archivos fueron modificados y cómo línea por línea. Tiene subopciones: `-p -<numero>` limita la cantidad de commits a mostrar dependiendo de `<numero>`, `-p <ruta-archivo>` permite los cambios de un archivo especifico
+- `--after="YYYY-MM-DD/today"` o `--before=<...>` : Para localizar los commits por fecha
+- `--author="<nombre>"` : Muestra los commits hechos por el usuario ingresado, resaltando su nombre con color
+- `--grep="<palabra-clave>"` : Busca y muestra los commits que contengan en sus mensajes el texto ingresado. Ejemplo: `--grep="Java"`. También se puede agregar `-i` para que sea case insensitive, ejemplo: `--grep="modify" -i`
+- `-S "<palabras-clave>"` : Muestra los commits cuyos archivos contengan las palabras ingresadas. Ejemplo: `-S "if __name__"`
 
 ## Clase 3
 
@@ -241,3 +246,43 @@ Opciones (la mayoria no usa guión)\:
 ## Clase 6
 
 Nada nuevo...
+
+## Clase 7
+
+Nada nuevo...
+
+## Clase 8
+
+`git clone <url-del-repo>`
+: Permite descargar y copiar un repositorio remoto a tu espacio local
+
+`git push`
+: Se usa para subir los cambios locales al repositorio remoto vinculado. Para el primer push se debe indicar la rama usando `git push -u origin <rama>` (`-u` es upstream, origin lo estableces con `git remote`).  
+Opciones\:
+
+- `--all` : Sube todos los cambios de todas las ramas, no solo de la que estas parado
+- `--tags` : Le indicas al push que incluya TODAS las tags locales que no estén en el servidor, OJO no se puede combinar con `--all` en la misma linea, deben hacerse dos push por separado.
+- `-f` o `--force` : Si el servidor rechaza el push, se lo puede forzar con esta opción. Sobreescribe el remoto con tu local, se puede pisar progreso cuidado.
+- `--force-with-lease` : Preferible antes que `-f`, fuerza tu push al servidor sin borrar los cambios nuevos de otros.
+- `origin --delete <rama>` : Permite eliminar del servidor la rama pasada como argumento
+
+<br>
+
+`git fetch origin`
+: Se usa para SOLO descargar el historial más reciente del servidor, sin hacer cambios inmediatos a tu zona de trabajo, permite revisar los cambios o ramas nuevas que se han hecho antes de integrarlos localmente. Se diferencia de git pull ya que éste es la combinación de fetch + merge en un solo paso.  
+Opciones\:
+
+- `-p` o `--prune` : Si se borraron ramas de forma remota, localmente las vas a seguir viendo. Usando esta opción esas ramas fantasmas se limpian.
+
+<br>
+
+`git pull`
+: Descarga e integra de inmediato los cambios en el servidor a tu espacio local. Es técnicamente la combinación de git fetch + git merge.  
+Opciones\:
+
+- `origin <rama>` : Sirve para actualizar la rama en la que estas parado con los cambios del servidor
+
+<br>
+
+`git shortlog`
+: Muestra el nombre del usuario, la cantidad de commits al lado de su nombre y una lista de solo los mensajes de los commits
