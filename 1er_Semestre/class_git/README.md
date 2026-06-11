@@ -286,3 +286,13 @@ Opciones\:
 
 `git shortlog`
 : Muestra el nombre del usuario, la cantidad de commits al lado de su nombre y una lista de solo los mensajes de los commits
+
+## Clase 9
+
+`ssh-keygen -t ed25519 -C "<email>"`
+: Permite generar una clave ssh guardandola por defecto en una carpeta oculta llamada `.ssh` en `~`, el nombre del archivo por defecto depende de tu algoritmo, en este caso seria `id_ed25519`. Al crear la clave te pedirá dónde guardarla, presionar enter para dejar por defecto. Al igual que preguntará por una contraseña (y otra vez para confirmarla), esto se puede dejar en blanco si se quiere.  
+Opciones\:
+
+- `-t <algoritmo>` : TYPE — Define el tipo de algoritmo criptográfico para crear la clave. El algoritmo ed25519 es el más seguro, moderno y eficiente actualmente. Aunque hay algunos sistemas que no soportan este algoritmo.
+- `-C <email>` : COMMENT — Agrega un comentario de texto dentro del archivo de la clave pública para identificar a qué cuenta o máquina le pertenece esa clave, comunmente va el mail.
+- `-b <bits>` : En caso de no poder usar `ed25519` y tener que usar `rsa` esta opción define la longitud de la clave en bits, para asegurar la máxima seguridad usando `rsa` se debe hacer `-b 4096`.
